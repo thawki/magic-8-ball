@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>8Ball Project</title>
+    <link rel="stylesheet" type="text/css" href="app.css">
+</head>
+
+<body>
+
+    <div class="ball"></div>
+    <div class="triangle"></div>
+
+    <form onsubmit="showAnswer(); return false;">
+        <br>
+        <input type="text" name="question" id="myInput" placeholder="Type your question here...">
+        <br>
+        <input type="submit" id="submit" value="Submit" disabled>
+        <br>
+        <input type="reset" id="reset" value="Reset">
+    </form>
+
+
+    <form>
+        <input type="text" name="answer" id="answer" placeholder="" style="display:none" readonly>
+    </form>
+
+    <div>
+
+        <input type="button" id="number" value="8">
+    </div>
+
+    <script>
+
+        function showAnswer() {
+
+            var values = ["Yes", "No", "Maybe"],
+                valueToUse = values[Math.floor(Math.random() * values.length)];
+
+            document.getElementById("answer").value = valueToUse;
+            document.getElementById("answer").style.display = "inline-block";
+
+        }
+
+        const questionInput = document.getElementById("myInput");
+        const answerTextarea = document.getElementById("answer");
+        const submitButton = document.getElementById("submit");
+        const resetButton = document.getElementById("reset");
+
+        questionInput.addEventListener("input", function () {
+            if (questionInput.value.length > 0) {
+                submitButton.disabled = false;
+            } else {
+                submitButton.disabled = true;
+            }
+        });
+
+        submitButton.addEventListener("click", function () {
+            const answer = Math.random() < 0.5 ? "Yes" : Math.random() < 0.5 ? "No" : "Maybe";
+            answerTextarea.value = answer;
+        });
+
+        resetButton.addEventListener("click", function () {
+            answerTextarea.value = "";
+        });
+    </script>
+</body>
+
+</html>
